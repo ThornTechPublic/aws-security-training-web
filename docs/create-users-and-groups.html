@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Module 1: Create Users and Groups · Thorn Tech Training</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Objectives"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Module 1: Create Users and Groups · Thorn Tech Training"/><meta property="og:type" content="website"/><meta property="og:url" content="https://thorntechpublic.github.io/aws-security-training-web/"/><meta property="og:description" content="## Objectives"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/aws-security-training-web/img/thorn_tech_t_icon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/aws-security-training-web/js/scrollSpy.js"></script><link rel="stylesheet" href="/aws-security-training-web/css/main.css"/><script src="/aws-security-training-web/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/aws-security-training-web/"><img class="logo" src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training"/><h2 class="headerTitleWithLogo">Thorn Tech Training</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/aws-security-training-web/docs/lab-table-of-contents" target="_self">Docs</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Module 1</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Lab Table of Contents</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-table-of-contents">Lab Table of Contents</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 1</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/initial-connection-instructions">Lab: Initial Connection Instructions</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/aws-security-training-web/docs/create-users-and-groups">Lab: Create Users and Groups</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/mfa-challenge">Challenge: MFA</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 2</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-instructions">Lab: VPC</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-challenge-nat-gateway">Challenge: NAT Gateway</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 3</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-3-lab-s3-access-from-ec2">Lab: S3 Access from EC2</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-3-challenge-s3-access-and-kms">Challenge: S3 Access and KMS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 4</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-serverless">Lab: Serverless Application</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab4-wordpress-application">Lab: WordPress Application</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 5</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-5-lab-cloudwatch-events">Lab: CloudWatch Events</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-5-aws-config-rules">Lab: AWS Config Rules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 6</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-6-lab-amazon-inspector">Lab: Amazon Inspector</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Appendix</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/create-an-ec2-key-pair">Create an EC2 Key Pair</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/spin-up-a-cloudformation-template">Spin Up a CloudFormation Template</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/tear-down-a-cloudformation-stack">Tear Down a CloudFormation Stack</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-into-an-ec2-instance-pc">SSH Into an EC2 Instance (PC)</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-to-an-ec2-instance-macos-or-linux-ec2connect">SSH to an EC2 Instance (MacOS or Linux)</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Module 1: Create Users and Groups</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="objectives"></a><a href="#objectives" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Objectives</h2>
+<ul>
+<li>Create an IAM user account for each member of your team.</li>
+<li>Add your IAM users to a group</li>
+<li>Grant permissions by adding attaching policies to the Group</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="overview"></a><a href="#overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h2>
+<p>In this lab, you will continue setting up your AWS account.</p>
+<p>The person logged in with the SSO account will provision an IAM account for each member of the group, as well as their own. The SSO account will not be used in any of the labs (but will still be available if you need it for some reason).</p>
+<p>The SSO user will first create a Group. Permissions will then be assigned to this Group. These permissions are fairly liberal, and will give you the ability to perform the labs.</p>
+<p>Then the SSO user will create an IAM user for each member of the team. Each user will be added to the Group. The SSO user will also relay the credentials as each user is created — just remember to check the box to require a password reset.</p>
+<h2><a class="anchor" aria-hidden="true" id="create-a-group-with-the-system-administrator-managed-policy"></a><a href="#create-a-group-with-the-system-administrator-managed-policy" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a Group with the System Administrator Managed Policy</h2>
+<ul>
+<li><p>Go to <strong>IAM</strong></p></li>
+<li><p>On the left, click on <strong>Groups</strong></p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/P8O9zowNj5S3ZuhJvYN2TdJA.png" alt=""></p></li>
+<li><p>Click <strong>Create New Group</strong></p></li>
+<li><p>For the <strong>Group Name</strong>, type <strong>LabGroup</strong></p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/0YgbkSzQLFKxEJaeMN1IhImF.png" alt=""></p></li>
+<li><p>Click <strong>Next Step</strong></p></li>
+<li><p>On the <strong>Attach Policy</strong> page, check the box next to <strong>SystemAdministrator</strong></p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/IPBdGOHC6AvcfkFGY4bcgoJF.png" alt=""></p></li>
+<li><p>Click <strong>Next Step</strong></p></li>
+<li><p>Click <strong>Create Group</strong></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="attach-an-inline-policy"></a><a href="#attach-an-inline-policy" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Attach an inline policy</h2>
+<p>In this section, you're going to add an <strong>Inline</strong> policy. This will cover additional permissions you will need
+that are not included in the <strong>SystemAdministrator</strong> managed policy.</p>
+<ul>
+<li><p>In <strong>IAM</strong>, click on <strong>LabGroup</strong></p></li>
+<li><p>Click on the <strong>Permissions</strong> tab</p></li>
+<li><p>Under <strong>Inline Policies</strong>, expand the disclosure triangle</p></li>
+<li><p>Click on the text <strong>click here</strong> to create a new inline policy</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/8U6GmxGCz96d0u7ANkHFiIOn.png" alt=""></p></li>
+<li><p>On the <strong>Set Permissions</strong> page, choose <strong>Custom Policy</strong></p></li>
+<li><p>Click <strong>Select</strong></p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/QBSK00nF-SJwq-Vco_SQjjd-.png" alt=""></p></li>
+<li><p>On the <strong>Review Policy</strong> page, enter a <strong>Policy Name</strong> of <code>LabGroupPolicy</code></p></li>
+<li><p>For the <strong>Policy document</strong>, paste in the following JSON text:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"Version"</span>: <span class="hljs-string">"2012-10-17"</span>,
+  <span class="hljs-attr">"Statement"</span>: [{
+      <span class="hljs-attr">"Effect"</span>: <span class="hljs-string">"Allow"</span>,
+      <span class="hljs-attr">"Action"</span>: [
+        <span class="hljs-string">"cloudformation:*"</span>,
+        <span class="hljs-string">"iam:*"</span>,
+        <span class="hljs-string">"inspector:*"</span>,
+        <span class="hljs-string">"ssm:*"</span>,
+        <span class="hljs-string">"dynamodb:*"</span>,
+        <span class="hljs-string">"rds:*"</span>,
+        <span class="hljs-string">"cloudfront:*"</span>,
+        <span class="hljs-string">"apigateway:*"</span>,
+        <span class="hljs-string">"lambda:*"</span>,
+        <span class="hljs-string">"waf:*"</span>
+      ],
+      <span class="hljs-attr">"Resource"</span>: <span class="hljs-string">"*"</span>
+  }]
+}
+</code></pre></li>
+<li><p>Click <strong>Apply Policy</strong></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="create-a-user"></a><a href="#create-a-user" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a User</h2>
+<p>In this section, you are going to create your IAM users.</p>
+<p>If you are the one logged in with the SSO account, gather your other team members so that they're ready to receive their new credentials.</p>
+<ul>
+<li><p>On the left, click on <strong>Users</strong></p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/ucaX7mxX9hIwiJGlfjjA46xq.png" alt=""></p></li>
+<li><p>Click <strong>Add user</strong></p></li>
+<li><p>Enter the <strong>user name</strong></p>
+<ul>
+<li>Click <strong>Add another user</strong> to create multiple users at once</li>
+</ul></li>
+<li><p>Check both boxes for <strong>Programmatic</strong> and <strong>Console</strong> access</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/UPMz7NMKRNuvMsn46_ixxRAX.png" alt=""></p></li>
+<li><p>Keep the default options:</p>
+<ul>
+<li><strong>Autogenerated password</strong></li>
+<li><strong>Require password reset</strong></li>
+</ul>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/XObFsFhaH-BYMY-FHW_AWnqv.png" alt=""></p></li>
+<li><p>Click <strong>Next: Permissions</strong></p></li>
+<li><p>On the <strong>Set permissions</strong> page, check the box next to <strong>LabGroup</strong></p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/vYkbuzBZ7hlSanFHIzCNb3Cr.png" alt=""></p></li>
+<li><p>Click <strong>Next: Tags</strong></p></li>
+<li><p>Click <strong>Next: Review</strong></p></li>
+<li><p>Click <strong>Create users</strong></p>
+<p>You should see the following screen:</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/1chCkH4p4t844IhCwf0NJqJm.png" alt=""></p></li>
+<li><p>Click the <strong>Download .csv</strong> button. This will download a <code>credentials.csv</code> file to your machine.</p></li>
+<li><p>Relay the account credentials to your team members.</p></li>
+<li><p>In the <strong>Success</strong> message at the top, you will see the <strong>AWS Management Console</strong> sign-in URL for your AWS account.
+Send this to your team members as well.</p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="testing-credentials-as-a-team-member"></a><a href="#testing-credentials-as-a-team-member" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Testing Credentials as a team member</h2>
+<p>In this section, each member of your team will log into AWS using your IAM credentials.</p>
+<ul>
+<li><p>Navigate to the AWS Management Console sign-in URL provided by your SSO administrator</p></li>
+<li><p>Enter the username and password provided to you</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/01Em_r4OXwnj9QXHT673I1Gk.png" alt=""></p></li>
+<li><p>You will be prompted to change your password on first login</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/s6OgGR5MjHVsofjMm_SHlZ6U.png" alt=""></p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="things-to-note"></a><a href="#things-to-note" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Things to note</h2>
+<h3><a class="anchor" aria-hidden="true" id="iam-vs-sso-login"></a><a href="#iam-vs-sso-login" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>IAM vs SSO login</h3>
+<p>Most AWS environments use IAM accounts rather than SSO. Our use of SSO is primarily to facility this lab environment. In future labs, you will be using your IAM account.</p>
+<h3><a class="anchor" aria-hidden="true" id="console-vs-programmatic-access"></a><a href="#console-vs-programmatic-access" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Console vs Programmatic access</h3>
+<p>In this lab, you are granting your team members both Console and Programmatic access. Console is the web interface for AWS. And programmatic is a set of access keys that you include when you make CLI and API calls.</p>
+<p>As a best practice, you can give users one or the other (or both) based on least privilege.</p>
+<p>In the lab, if you're not comfortable with your SSO administrator seeing your <strong>Secret access key</strong>, feel free to
+rovision yourself a new one after login.</p>
+<h3><a class="anchor" aria-hidden="true" id="aws-managed-vs-customer-managed-vs-inline-policies"></a><a href="#aws-managed-vs-customer-managed-vs-inline-policies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>AWS Managed vs Customer Managed vs Inline policies</h3>
+<p>AWS Managed policies are useful for quickly granting broad permissions. You do not have the ability to edit AWS managed
+policies, because they are owned by AWS. Some AWS Managed policies (e.g. AmazonEC2RoleforSSM) are very useful because they
+pull together a set of distributed but commonly used permissions. Other AWS Managed policies (e.g. AdministratorAccess)
+should be used with caution.</p>
+<p>Customer Managed policies are defined by you. These can be re-used for different identities.</p>
+<p>Inline policies apply to a single identity, and are often used for ad hoc troubleshooting.</p>
+<h3><a class="anchor" aria-hidden="true" id="aws-management-console-sign-in-url"></a><a href="#aws-management-console-sign-in-url" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>AWS Management Console Sign-In URL</h3>
+<p>If you ever need to remember the URL to the AWS console, go to the IAM <strong>Dashboard</strong>. Toward the top, you'll see the
+URL. You can also click <strong>Customize</strong> to make this URL more user friendly.</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/quqQIP5AC_XzT-HPet1J-wG3.png" alt=""></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/aws-security-training-web/docs/initial-connection-instructions"><span class="arrow-prev">← </span><span>Lab: Initial Connection Instructions</span></a><a class="docs-next button" href="/aws-security-training-web/docs/mfa-challenge"><span>Challenge: MFA</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#objectives">Objectives</a></li><li><a href="#overview">Overview</a></li><li><a href="#create-a-group-with-the-system-administrator-managed-policy">Create a Group with the System Administrator Managed Policy</a></li><li><a href="#attach-an-inline-policy">Attach an inline policy</a></li><li><a href="#create-a-user">Create a User</a></li><li><a href="#testing-credentials-as-a-team-member">Testing Credentials as a team member</a></li><li><a href="#things-to-note">Things to note</a><ul class="toc-headings"><li><a href="#iam-vs-sso-login">IAM vs SSO login</a></li><li><a href="#console-vs-programmatic-access">Console vs Programmatic access</a></li><li><a href="#aws-managed-vs-customer-managed-vs-inline-policies">AWS Managed vs Customer Managed vs Inline policies</a></li><li><a href="#aws-management-console-sign-in-url">AWS Management Console Sign-In URL</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/aws-security-training-web/" class="nav-home"><img src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training" width="66" height="58"/></a><div><h5>Docs</h5><a href="/aws-security-training-web/docs/en/doc1.html">Getting Started (or other categories)</a></div></section><section class="copyright">Copyright © 2019 Thorn Technologies LLC</section></footer></div></body></html>

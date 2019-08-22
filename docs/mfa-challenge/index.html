@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Module 1 Challenge: MFA · Thorn Tech Training</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="If you have a lot of time remaining, you can configure MFA (multi-factor authentication) on your IAM account. For AWS, this is typically done with Google Authenticator, a virtual MFA device. MFA is recommended for any IAM account with console access — especially if it&#x27;s a privileged account."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Module 1 Challenge: MFA · Thorn Tech Training"/><meta property="og:type" content="website"/><meta property="og:url" content="https://thorntechpublic.github.io/aws-security-training-web/"/><meta property="og:description" content="If you have a lot of time remaining, you can configure MFA (multi-factor authentication) on your IAM account. For AWS, this is typically done with Google Authenticator, a virtual MFA device. MFA is recommended for any IAM account with console access — especially if it&#x27;s a privileged account."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/aws-security-training-web/img/thorn_tech_t_icon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/aws-security-training-web/js/scrollSpy.js"></script><link rel="stylesheet" href="/aws-security-training-web/css/main.css"/><script src="/aws-security-training-web/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/aws-security-training-web/"><img class="logo" src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training"/><h2 class="headerTitleWithLogo">Thorn Tech Training</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/aws-security-training-web/docs/lab-table-of-contents" target="_self">Docs</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Module 1</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Lab Table of Contents</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-table-of-contents">Lab Table of Contents</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 1</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/initial-connection-instructions">Lab: Initial Connection Instructions</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/create-users-and-groups">Lab: Create Users and Groups</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/aws-security-training-web/docs/mfa-challenge">Challenge: MFA</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 2</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-instructions">Lab: VPC</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-challenge-nat-gateway">Challenge: NAT Gateway</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 3</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-3-lab-s3-access-from-ec2">Lab: S3 Access from EC2</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-3-challenge-s3-access-and-kms">Challenge: S3 Access and KMS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 4</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-serverless">Lab: Serverless Application</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab4-wordpress-application">Lab: WordPress Application</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 5</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-5-lab-cloudwatch-events">Lab: CloudWatch Events</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-5-aws-config-rules">Lab: AWS Config Rules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 6</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-6-lab-amazon-inspector">Lab: Amazon Inspector</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Appendix</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/create-an-ec2-key-pair">Create an EC2 Key Pair</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/spin-up-a-cloudformation-template">Spin Up a CloudFormation Template</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/tear-down-a-cloudformation-stack">Tear Down a CloudFormation Stack</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-into-an-ec2-instance-pc">SSH Into an EC2 Instance (PC)</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-to-an-ec2-instance-macos-or-linux-ec2connect">SSH to an EC2 Instance (MacOS or Linux)</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Module 1 Challenge: MFA</h1></header><article><div><span><p>If you have a lot of time remaining, you can configure MFA (multi-factor authentication) on your IAM account. For AWS, this is typically done with Google Authenticator, a virtual MFA device. MFA is recommended for any IAM account with console access — especially if it's a privileged account.</p>
+<p>Here's a summary of the things you need to do:</p>
+<ul>
+<li>In IAM, select your username</li>
+<li>Click on the <strong>Security credentials</strong> tab</li>
+<li>Next to <strong>Assigned MFA device</strong>, click <strong>Manage</strong></li>
+<li>Select <strong>Virtual MFA device</strong> and click <strong>Continue</strong></li>
+<li>Download the <strong>Google Authenticator</strong> app on your mobile device</li>
+<li>Follow the instructions in the wizard, which will include:
+<ul>
+<li>Scanning the QR code with your camera</li>
+<li>Entering the MFA code</li>
+<li>Entering the MFA code a second time, after the first one times out</li>
+</ul></li>
+<li>Sign out of AWS, and sign in again using MFA</li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/aws-security-training-web/docs/create-users-and-groups"><span class="arrow-prev">← </span><span>Lab: Create Users and Groups</span></a><a class="docs-next button" href="/aws-security-training-web/docs/vpc-lab-instructions"><span>Lab: VPC</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/aws-security-training-web/" class="nav-home"><img src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training" width="66" height="58"/></a><div><h5>Docs</h5><a href="/aws-security-training-web/docs/en/doc1.html">Getting Started (or other categories)</a></div></section><section class="copyright">Copyright © 2019 Thorn Technologies LLC</section></footer></div></body></html>

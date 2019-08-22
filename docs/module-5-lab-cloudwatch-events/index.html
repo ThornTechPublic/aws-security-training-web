@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Module 5: Lab CloudWatch Events · Thorn Tech Training</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Objectives"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Module 5: Lab CloudWatch Events · Thorn Tech Training"/><meta property="og:type" content="website"/><meta property="og:url" content="https://thorntechpublic.github.io/aws-security-training-web/"/><meta property="og:description" content="## Objectives"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/aws-security-training-web/img/thorn_tech_t_icon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/aws-security-training-web/js/scrollSpy.js"></script><link rel="stylesheet" href="/aws-security-training-web/css/main.css"/><script src="/aws-security-training-web/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/aws-security-training-web/"><img class="logo" src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training"/><h2 class="headerTitleWithLogo">Thorn Tech Training</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/aws-security-training-web/docs/lab-table-of-contents" target="_self">Docs</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Module 5</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Lab Table of Contents</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-table-of-contents">Lab Table of Contents</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 1</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/initial-connection-instructions">Lab: Initial Connection Instructions</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/create-users-and-groups">Lab: Create Users and Groups</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/mfa-challenge">Challenge: MFA</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 2</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-instructions">Lab: VPC</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-challenge-nat-gateway">Challenge: NAT Gateway</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 3</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-3-lab-s3-access-from-ec2">Lab: S3 Access from EC2</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-3-challenge-s3-access-and-kms">Challenge: S3 Access and KMS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 4</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-serverless">Lab: Serverless Application</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab4-wordpress-application">Lab: WordPress Application</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 5</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/aws-security-training-web/docs/module-5-lab-cloudwatch-events">Lab: CloudWatch Events</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-5-aws-config-rules">Lab: AWS Config Rules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 6</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-6-lab-amazon-inspector">Lab: Amazon Inspector</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Appendix</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/create-an-ec2-key-pair">Create an EC2 Key Pair</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/spin-up-a-cloudformation-template">Spin Up a CloudFormation Template</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/tear-down-a-cloudformation-stack">Tear Down a CloudFormation Stack</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-into-an-ec2-instance-pc">SSH Into an EC2 Instance (PC)</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-to-an-ec2-instance-macos-or-linux-ec2connect">SSH to an EC2 Instance (MacOS or Linux)</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Module 5: Lab CloudWatch Events</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="objectives"></a><a href="#objectives" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Objectives</h2>
+<p>In this lab, you will listen for user login events, and generate email alerts in real time. This specific setup can be useful for keeping an eye on seldom used personal AWS accounts. But learning how to wire CloudWatch Events to a target such as SNS in general has broader applications in automating security responses.</p>
+<p>In this lab, you will:</p>
+<ul>
+<li>Create a CloudWatch Rule that listens for IAM user login events in CloudTrail</li>
+<li>Create an SNS topic, and subscribe to it via email</li>
+<li>Create an IAM role and SNS Topic Policy to grant these resources permission to communicate with each other</li>
+</ul>
+<p>As in prior labs, you will set all this up with a CloudFormation template.</p>
+<h2><a class="anchor" aria-hidden="true" id="spin-up-the-cloudformation-template"></a><a href="#spin-up-the-cloudformation-template" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Spin up the CloudFormation template</h2>
+<p>Spin up the CloudFormation template using these instructions: <a href="/aws-security-training-web/docs/spin-up-a-cloudformation-template">Spin up a CloudFormation template</a></p>
+<ul>
+<li><strong>CloudFormation template</strong>: <code>CloudWatchEvents.template</code></li>
+<li><strong>CloudFormation Parameters</strong>:
+<ul>
+<li><strong>Email</strong>: Enter a real email address, since SNS will be sending emails to this address</li>
+<li><strong>IAMUser</strong>: Enter your IAM user name. You will be monitoring login events for this user.</li>
+</ul></li>
+<li><strong>Typical provisioning duration</strong>: 2 minutes</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="confirm-sns-subscription"></a><a href="#confirm-sns-subscription" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Confirm SNS Subscription</h2>
+<p>You should immediately receive an email.</p>
+<hr>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/LsPrt_KM1CFVBh7ELLG-LG5k.png" alt=""></p>
+<hr>
+<p>Click <strong>Confirm subscription</strong></p>
+<p>You will now receive email alerts from SNS</p>
+<h2><a class="anchor" aria-hidden="true" id="log-in-as-the-iam-user"></a><a href="#log-in-as-the-iam-user" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Log in as the IAM User</h2>
+<p>If you are already logged in, sign out of the IAM user account.</p>
+<p>Log in as the IAM user.</p>
+<p>Within a few minutes, you should receive an email with the following information:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"detail-type"</span>:<span class="hljs-string">"AWS Console Sign In via CloudTrail"</span>,
+  <span class="hljs-attr">"source"</span>:<span class="hljs-string">"aws.signin"</span>,
+  <span class="hljs-attr">"account"</span>:<span class="hljs-string">"453832482648"</span>,
+  <span class="hljs-attr">"region"</span>:<span class="hljs-string">"us-east-1"</span>,
+  <span class="hljs-attr">"detail"</span>:{
+    <span class="hljs-attr">"userIdentity"</span>: {
+      <span class="hljs-attr">"type"</span>:<span class="hljs-string">"IAMUser"</span>,
+      <span class="hljs-attr">"principalId"</span>:<span class="hljs-string">"AIDAWTKUGD5MBVNBLG2HI"</span>,
+      <span class="hljs-attr">"arn"</span>:<span class="hljs-string">"arn:aws:iam::453832482648:user/robtest"</span>,
+      <span class="hljs-attr">"accountId"</span>:<span class="hljs-string">"453832482648"</span>,
+      <span class="hljs-attr">"userName"</span>:<span class="hljs-string">"robtest"</span>
+    },
+    <span class="hljs-attr">"eventTime"</span>:<span class="hljs-string">"2019-07-31T15:54:25Z"</span>,
+    <span class="hljs-attr">"eventSource"</span>:<span class="hljs-string">"signin.amazonaws.com"</span>,
+    <span class="hljs-attr">"eventName"</span>:<span class="hljs-string">"ConsoleLogin"</span>,
+    <span class="hljs-attr">"awsRegion"</span>:<span class="hljs-string">"us-east-1"</span>,
+    <span class="hljs-attr">"sourceIPAddress"</span>:<span class="hljs-string">"71.244.135.67"</span>,
+    <span class="hljs-attr">"userAgent"</span>:<span class="hljs-string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"</span>,
+    <span class="hljs-attr">"responseElements"</span>: {
+      <span class="hljs-attr">"ConsoleLogin"</span>:<span class="hljs-string">"Success"</span>
+    },
+    <span class="hljs-attr">"additionalEventData"</span>:{
+      <span class="hljs-attr">"LoginTo"</span>:<span class="hljs-string">"https://console.aws.amazon.com/console/home?nc2=h_ct&amp;src=header-signin&amp;state=hashArgs%23&amp;isauthcode=true"</span>,
+      <span class="hljs-attr">"MobileVersion"</span>:<span class="hljs-string">"No"</span>,
+      <span class="hljs-attr">"MFAUsed"</span>:<span class="hljs-string">"Yes"</span>
+    },
+    <span class="hljs-attr">"eventType"</span>:<span class="hljs-string">"AwsConsoleSignIn"</span>
+  }
+}
+</code></pre>
+<p><strong>Note</strong>: You'll have to format the data yourself so that it's readable.</p>
+<h2><a class="anchor" aria-hidden="true" id="how-does-it-work"></a><a href="#how-does-it-work" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How does it work</h2>
+<p>Here's a diagram of the architecture:</p>
+<hr>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/K67d52noj2zykDoHkkxEnQdz.png" alt=""></p>
+<hr>
+<p>Starting from the top right:</p>
+<ul>
+<li>CloudTrail is already integrated with <strong>CloudWatch Logs</strong>, thanks to the <strong>Control Tower GuardRail</strong></li>
+<li>A <strong>CloudWatch Event Rule</strong> listens for an <code>AWS Console Sign In via CloudTrail</code> event for a specific IAM user</li>
+<li>The CloudWatch Event Rule forwards the event to a <strong>Target</strong>, which in this case is an <strong>SNS Topic</strong></li>
+<li>An <strong>IAM Role</strong> grants the CloudWatch Event Rule permission to publish messages to the SNS Topic</li>
+<li>An <strong>SNS Topic Policy</strong> allows CloudWatch Events to publish messages to SNS</li>
+<li>The SNS Topic pushes messages to all subscribers, including the SNS Email Subscription you confirmed at the beginning of the lab</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="cleanup"></a><a href="#cleanup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cleanup</h2>
+<p>When finished with this lab, delete your CloudFormation stack:</p>
+<p><a href="/aws-security-training-web/docs/tear-down-a-cloudformation-stack">Tear down a CloudFormation stack</a></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/aws-security-training-web/docs/lab4-wordpress-application"><span class="arrow-prev">← </span><span class="function-name-prevnext">Lab: WordPress Application</span></a><a class="docs-next button" href="/aws-security-training-web/docs/module-5-aws-config-rules"><span>Lab: AWS Config Rules</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#objectives">Objectives</a></li><li><a href="#spin-up-the-cloudformation-template">Spin up the CloudFormation template</a></li><li><a href="#confirm-sns-subscription">Confirm SNS Subscription</a></li><li><a href="#log-in-as-the-iam-user">Log in as the IAM User</a></li><li><a href="#how-does-it-work">How does it work</a></li><li><a href="#cleanup">Cleanup</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/aws-security-training-web/" class="nav-home"><img src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training" width="66" height="58"/></a><div><h5>Docs</h5><a href="/aws-security-training-web/docs/en/doc1.html">Getting Started (or other categories)</a></div></section><section class="copyright">Copyright © 2019 Thorn Technologies LLC</section></footer></div></body></html>

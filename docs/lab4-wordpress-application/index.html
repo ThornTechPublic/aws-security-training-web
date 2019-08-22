@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Module 4 Lab: WordPress Application · Thorn Tech Training</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="**Note**: It takes over half an hour to spin up these CloudFormation templates. For the sake of time, you will spin these up first, and work on the Serverless lab while you wait."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Module 4 Lab: WordPress Application · Thorn Tech Training"/><meta property="og:type" content="website"/><meta property="og:url" content="https://thorntechpublic.github.io/aws-security-training-web/"/><meta property="og:description" content="**Note**: It takes over half an hour to spin up these CloudFormation templates. For the sake of time, you will spin these up first, and work on the Serverless lab while you wait."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/aws-security-training-web/img/thorn_tech_t_icon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/aws-security-training-web/js/scrollSpy.js"></script><link rel="stylesheet" href="/aws-security-training-web/css/main.css"/><script src="/aws-security-training-web/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/aws-security-training-web/"><img class="logo" src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training"/><h2 class="headerTitleWithLogo">Thorn Tech Training</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/aws-security-training-web/docs/lab-table-of-contents" target="_self">Docs</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Module 4</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Lab Table of Contents</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-table-of-contents">Lab Table of Contents</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 1</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/initial-connection-instructions">Lab: Initial Connection Instructions</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/create-users-and-groups">Lab: Create Users and Groups</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/mfa-challenge">Challenge: MFA</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 2</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-instructions">Lab: VPC</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-challenge-nat-gateway">Challenge: NAT Gateway</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 3</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-3-lab-s3-access-from-ec2">Lab: S3 Access from EC2</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-3-challenge-s3-access-and-kms">Challenge: S3 Access and KMS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 4</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-serverless">Lab: Serverless Application</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/aws-security-training-web/docs/lab4-wordpress-application">Lab: WordPress Application</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 5</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-5-lab-cloudwatch-events">Lab: CloudWatch Events</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-5-aws-config-rules">Lab: AWS Config Rules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 6</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-6-lab-amazon-inspector">Lab: Amazon Inspector</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Appendix</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/create-an-ec2-key-pair">Create an EC2 Key Pair</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/spin-up-a-cloudformation-template">Spin Up a CloudFormation Template</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/tear-down-a-cloudformation-stack">Tear Down a CloudFormation Stack</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-into-an-ec2-instance-pc">SSH Into an EC2 Instance (PC)</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-to-an-ec2-instance-macos-or-linux-ec2connect">SSH to an EC2 Instance (MacOS or Linux)</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Module 4 Lab: WordPress Application</h1></header><article><div><span><p><strong>Note</strong>: It takes over half an hour to spin up these CloudFormation templates. For the sake of time, you will spin these up first, and work on the Serverless lab while you wait.</p>
+<h2><a class="anchor" aria-hidden="true" id="objectives"></a><a href="#objectives" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Objectives</h2>
+<p>In this lab, you will deploy a WordPress application (LAMP stack). As usual, you will deploy this via CloudFormation.</p>
+<p>The purpose of this lab is to:</p>
+<ul>
+<li>Become familiar with deploying a WordPress application</li>
+<li>Identify some of the security challenges with this architecture</li>
+<li>Explore using the Web Application Firewall (WAF)</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="deploy-wordpress-using-cloudformation"></a><a href="#deploy-wordpress-using-cloudformation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deploy WordPress using CloudFormation</h2>
+<p>Spin up the CloudFormation template using these instructions: <a href="/aws-security-training-web/docs/spin-up-a-cloudformation-template">Spin up a CloudFormation template</a></p>
+<ul>
+<li><strong>CloudFormation template</strong>: <code>WordPress.template</code></li>
+<li><strong>CloudFormation Parameters</strong>:
+<ul>
+<li><strong>DBClass</strong>: Keep the default of <code>db.t2.small</code></li>
+<li><strong>DBPassword</strong>: Enter a password with the following requirements:</li>
+</ul></li>
+</ul>
+<pre><code class="hljs">Must contain <span class="hljs-keyword">at</span> least <span class="hljs-number">8</span> characters. <span class="hljs-keyword">Do</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">use</span> &amp;, /, @, single, <span class="hljs-keyword">or</span> double quotes.
+</code></pre>
+<ul>
+<li><strong>Typical provisioning duration</strong>: 37 minutes</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="deploy-owasp-top-10-cloudformation-template"></a><a href="#deploy-owasp-top-10-cloudformation-template" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deploy OWASP Top 10 CloudFormation template</h2>
+<p>Have one member of your team to spin up this CloudFormation template:</p>
+<p><a href="https://github.com/aws-samples/aws-waf-sample/blob/master/waf-owasp-top-10/owasp_10_base.yml">https://github.com/aws-samples/aws-waf-sample/blob/master/waf-owasp-top-10/owasp_10_base.yml</a></p>
+<p><strong>Important</strong>: Only spin up one of these stacks per AWS account.</p>
+<ul>
+<li>Make sure to set global (not regional)</li>
+<li>For the <strong>Allowed IP source (CIDR)</strong>, enter your public IP followed by /32.</li>
+</ul>
+<p><strong>Duration</strong>: Takes about 20 minutes to spin up.</p>
+<h2><a class="anchor" aria-hidden="true" id="test-the-application"></a><a href="#test-the-application" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Test the application</h2>
+<p>Go to the <strong>CloudFormation</strong> &gt; <strong>Outputs</strong> tab of the WordPress stack.</p>
+<p>Paste the <strong>EC2PublicIP</strong> value into your web browser.</p>
+<p>Also try pasting the <strong>CloudFrontDNS</strong> value into your web browser.</p>
+<p>It will take a few minutes to start up, but you should eventually see the front page of a WordPress site.</p>
+<p><strong>Note</strong>: All of the images and styling is broken. This is because the site is pointing to a fake domain <a href="http://www.example.com">www.example.com</a>, and the browser is requesting static assets from that domain.</p>
+<h2><a class="anchor" aria-hidden="true" id="about-the-wordpress-application"></a><a href="#about-the-wordpress-application" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>About the WordPress application</h2>
+<p>This is the general architecture of the WordPress application:</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/x6CpHPEPhalA10sO5D9wHGo3.png" alt=""></p>
+<ul>
+<li>The user accesses the site by hitting the DNS endpoint of CloudFront, which is a CDN</li>
+<li>CloudFront proxies the request to the EC2 instance</li>
+<li>The EC2 instance is running Nginx as the web server</li>
+<li>Nginx proxies PHP requests to PHP-FPM</li>
+<li>Database requests are sent to Aurora, which is a database with a highly available storage layer</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="security-considerations-for-wordpress"></a><a href="#security-considerations-for-wordpress" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Security Considerations for WordPress</h2>
+<p>Securing WordPress is a broad topic that is out of the scope of this lab. But there are a few things to highlight with this particular application architecture:</p>
+<ul>
+<li>There is no SSL certificate configured, so any authenticated sessions to the WordPress dashboard are sent in clear text. Although we could add a self-signed certificate to the EC2 instance, CloudFront requires a real SSL certificate. And for that, we would need to configure a valid domain name.</li>
+<li>The EC2 instance is in a public subnet. While this makes it easier to develop and troubleshoot, anyone can bypass CloudFront and/or the Application Load Balancer. Doing so also bypasses any WAF and Shield configuration.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="add-a-web-application-firewall"></a><a href="#add-a-web-application-firewall" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Add a Web Application Firewall</h2>
+<p>Go to <strong>CloudFront</strong> and select your distribution</p>
+<p>Under the <strong>General</strong> tab, click <strong>Edit</strong></p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/Cage36IXIx7bYwEbzXnRJnmW.png" alt=""></p>
+<hr>
+<p>Set the <strong>AWS WAF Web ACL</strong></p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/kxgAuTSJ4JutnVxcoykjcGiv.png" alt=""></p>
+<hr>
+<p>Click <strong>Yes, Edit</strong></p>
+<h2><a class="anchor" aria-hidden="true" id="explore-waf"></a><a href="#explore-waf" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Explore WAF</h2>
+<p>Go to <strong>WAF and Shield</strong></p>
+<p>Click on <strong>Web ACLs</strong></p>
+<p>Click on <code>generic-owasp-acl</code></p>
+<p>Click on the <strong>Rules</strong> tab</p>
+<p>You'll see something like this: (see image below)</p>
+<p>Feel free to explore the WAF interface. Also don’t forget to check out the AWS Marketplace WAF products:</p>
+<p><a href="https://aws.amazon.com/marketplace/solutions/security/waf-managed-rules">https://aws.amazon.com/marketplace/solutions/security/waf-managed-rules</a></p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/75At7vJVmjazUBHIwFJ5sIs6.png" alt=""></p>
+<h2><a class="anchor" aria-hidden="true" id="cleanup"></a><a href="#cleanup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cleanup</h2>
+<p>When finished with this lab, <strong>DO NOT</strong> delete your CloudFormation stack. You will need this stack to perform the Amazon Inspector lab later on.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/aws-security-training-web/docs/lab-serverless"><span class="arrow-prev">← </span><span>Lab: Serverless Application</span></a><a class="docs-next button" href="/aws-security-training-web/docs/module-5-lab-cloudwatch-events"><span class="function-name-prevnext">Lab: CloudWatch Events</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#objectives">Objectives</a></li><li><a href="#deploy-wordpress-using-cloudformation">Deploy WordPress using CloudFormation</a></li><li><a href="#deploy-owasp-top-10-cloudformation-template">Deploy OWASP Top 10 CloudFormation template</a></li><li><a href="#test-the-application">Test the application</a></li><li><a href="#about-the-wordpress-application">About the WordPress application</a></li><li><a href="#security-considerations-for-wordpress">Security Considerations for WordPress</a></li><li><a href="#add-a-web-application-firewall">Add a Web Application Firewall</a></li><li><a href="#explore-waf">Explore WAF</a></li><li><a href="#cleanup">Cleanup</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/aws-security-training-web/" class="nav-home"><img src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training" width="66" height="58"/></a><div><h5>Docs</h5><a href="/aws-security-training-web/docs/en/doc1.html">Getting Started (or other categories)</a></div></section><section class="copyright">Copyright © 2019 Thorn Technologies LLC</section></footer></div></body></html>

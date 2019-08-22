@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Module 2: VPC Lab · Thorn Tech Training</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Objectives"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Module 2: VPC Lab · Thorn Tech Training"/><meta property="og:type" content="website"/><meta property="og:url" content="https://thorntechpublic.github.io/aws-security-training-web/"/><meta property="og:description" content="## Objectives"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/aws-security-training-web/img/thorn_tech_t_icon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/aws-security-training-web/js/scrollSpy.js"></script><link rel="stylesheet" href="/aws-security-training-web/css/main.css"/><script src="/aws-security-training-web/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/aws-security-training-web/"><img class="logo" src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training"/><h2 class="headerTitleWithLogo">Thorn Tech Training</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/aws-security-training-web/docs/lab-table-of-contents" target="_self">Docs</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Module 2</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Lab Table of Contents</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-table-of-contents">Lab Table of Contents</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 1</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/initial-connection-instructions">Lab: Initial Connection Instructions</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/create-users-and-groups">Lab: Create Users and Groups</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/mfa-challenge">Challenge: MFA</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 2</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-instructions">Lab: VPC</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-challenge-nat-gateway">Challenge: NAT Gateway</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 3</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-3-lab-s3-access-from-ec2">Lab: S3 Access from EC2</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-3-challenge-s3-access-and-kms">Challenge: S3 Access and KMS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 4</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-serverless">Lab: Serverless Application</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab4-wordpress-application">Lab: WordPress Application</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 5</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-5-lab-cloudwatch-events">Lab: CloudWatch Events</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-5-aws-config-rules">Lab: AWS Config Rules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 6</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-6-lab-amazon-inspector">Lab: Amazon Inspector</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Appendix</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/create-an-ec2-key-pair">Create an EC2 Key Pair</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/spin-up-a-cloudformation-template">Spin Up a CloudFormation Template</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/tear-down-a-cloudformation-stack">Tear Down a CloudFormation Stack</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-into-an-ec2-instance-pc">SSH Into an EC2 Instance (PC)</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-to-an-ec2-instance-macos-or-linux-ec2connect">SSH to an EC2 Instance (MacOS or Linux)</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Module 2: VPC Lab</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="objectives"></a><a href="#objectives" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Objectives</h2>
+<ul>
+<li>Spin up a VPC with a public and private subnet</li>
+<li>SSH to a bastion host in the public subnet</li>
+<li>From the bastion host, SSH to an EC2 instance in the private subnet</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="overview"></a><a href="#overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h2>
+<p>In this lab, you will provision a Virtual Private Cloud (VPC). This is the network layer including public and private
+subnets, route tables, and an Internet Gateway.</p>
+<p>You will provision a server inside the private subnet. Your goal is to connect to this box over SSH.</p>
+<p>Since you can't reach this server directly, you will also provision a bastion host (jump box) in the public subnet.
+Using a 2-step process, you can SSH into the private EC2 instance.</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/kL3sneYGCmKM-mWSo1MRlwji.png" alt=""></p>
+<h2><a class="anchor" aria-hidden="true" id="region-selection"></a><a href="#region-selection" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Region selection</h2>
+<p>Unless otherwise noted, you will perform the labs in the <strong>N. Virginia</strong> region. This is because this region supports
+the most services.</p>
+<h2><a class="anchor" aria-hidden="true" id="preparation"></a><a href="#preparation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preparation</h2>
+<p>Create an EC2 Key Pair by following these instructions:
+<a href="/aws-security-training-web/docs/create-an-ec2-key-pair">Create an EC2 Key Pair</a></p>
+<h2><a class="anchor" aria-hidden="true" id="spin-up-the-cloudformation-template"></a><a href="#spin-up-the-cloudformation-template" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Spin up the CloudFormation template</h2>
+<p>Spin up the CloudFormation template using these instructions:
+<a href="/aws-security-training-web/docs/spin-up-a-cloudformation-template">Spin up a CloudFormation template</a></p>
+<ul>
+<li><strong>CloudFormation template</strong>: <code>PublicPrivateSubnets.template</code></li>
+<li><strong>CloudFormation Parameters</strong>:
+<ul>
+<li>See the CloudFormation template instructions for details</li>
+</ul></li>
+</ul>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/jR2aimwRhshnW59mBFz5CIRJ.png" alt=""></p>
+<ul>
+<li><strong>Typical provisioning duration</strong>:  3 to 5 minutes</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="connect-to-the-bastion-host"></a><a href="#connect-to-the-bastion-host" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Connect to the Bastion host</h2>
+<p>A bastion host is a public facing point of entry into your network. This lets you reduce exposure while providing
+controlled access to your network, much like the front door of a house.</p>
+<p>In CloudFormation, click on the <strong>Outputs</strong> tab</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/BbsmmVmUjBAXhrRaXyZnFGgl.png" alt=""></p>
+<p>Copy the public IP address next to <strong>BastionIP</strong></p>
+<p>Below are two sets of SSH instructions — one for PC using PuTTY, and the other for Mac/Linux. This lab involves making
+a double-jump across EC2 instances, so you'll be doing something called <strong>agent forwarding</strong>. If this is your first
+time doing this, hang in there because it can be complicated.</p>
+<h3><a class="anchor" aria-hidden="true" id="pc-putty"></a><a href="#pc-putty" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PC / PuTTY</h3>
+<p>In this lab, before you connect using PuTTY, you have to use a tool called <strong>Pageant</strong>. Pageant can hold onto your
+private keys for use in agent forwarding, which you'll do momentarily.</p>
+<ul>
+<li>Launch Pageant, which comes bundled with PuTTY.</li>
+</ul>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/21rabsLyzwOYPmIGmooex5Bb.png" alt=""></p>
+<ul>
+<li>Pageant doesn't open an application. Rather, it runs as a service, so you won't see any windows open.</li>
+<li>If for some reason you don't see the notification icons, right-click on the Task Bar and choose <strong>Show all
+notification icons</strong>.</li>
+</ul>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/EiOj4vFpIM32K65XP-1dfJU4.png" alt=""></p>
+<ul>
+<li>From the notification area, right-click on the Pageant icon</li>
+<li>Choose <strong>Add key</strong> from the list of options</li>
+</ul>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/o5tDE52wymQPA_vbJcMhbiF-.png" alt=""></p>
+<ul>
+<li>Navigate to the <code>.ppk</code> file you created earlier, and click <strong>Open</strong>.</li>
+</ul>
+<p>Follow <a href="/aws-security-training-web/docs/ssh-into-an-ec2-instance-pc">these instructions</a> to connect to the Bastion IP address, but with one slight change:</p>
+<p>When configuring the SSH Auth settings, check the box next to <strong>Allow agent forwarding</strong>.</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/Y5oYBzKyLXC_kguu1Hb5MNGy.png" alt=""></p>
+<h3><a class="anchor" aria-hidden="true" id="macos-ec2connect"></a><a href="#macos-ec2connect" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>MacOS/EC2Connect</h3>
+<p>Before you begin, run the following command to add the private key to your keychain. This will let you forward the key
+in the next step.</p>
+<pre><code class="hljs css language-bash">ssh-add -K key-pair-private-key.pem
+</code></pre>
+<p>Follow <a href="/aws-security-training-web/docs/ssh-to-an-ec2-instance-macos-or-linux-ec2connect">these instructions</a> to connect to the Bastion IP address, but with one slight change:</p>
+<p>Use the <code>-A</code> flag when connecting via SSH:</p>
+<pre><code class="hljs css language-markdown">ssh -A -i key-pair-private-key.pem ec2-user@<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">public-ip</span>&gt;</span></span>
+</code></pre>
+<p>The <code>-A</code> flag forwards the authentication agent connection, allowing you to use your private key on your next SSH hop.</p>
+<p><strong>Note</strong>: Make sure you trust the server, because the <code>-A</code> flag exposes your private key to your SSH session. This is
+better than the alternative, which is to copy your private key onto the Bastion host, exposing it to anyone with root
+access.</p>
+<h2><a class="anchor" aria-hidden="true" id="connect-to-the-private-ec2-instance"></a><a href="#connect-to-the-private-ec2-instance" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Connect to the private EC2 instance</h2>
+<p>From the Bastion host, connect to the private EC2 instance.</p>
+<p>On the CloudFormation <strong>Outputs</strong> tab, copy the value for the <strong>PrivateEC2IP</strong></p>
+<p>At the Bastion host command prompt, enter the following:</p>
+<pre><code class="hljs css language-markdown">ssh ec2-user@<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">private-ec2-ip</span>&gt;</span></span> 
+</code></pre>
+<p><strong>Note</strong>: There's no need to specify your private key, because you are forwarding your agent connection.</p>
+<p>When prompted to trust the private EC2 instance’s ECDSA host key, type ​<strong>yes</strong></p>
+<p>You should see the command prompt of the private EC2 instance.</p>
+<h2><a class="anchor" aria-hidden="true" id="what-just-happened"></a><a href="#what-just-happened" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What just happened?</h2>
+<p>If you've reached this point, you're done with the main part of the lab.</p>
+<p>This section will explain at a high level how the CloudFormation template works. This will help you do the challenge
+section (if time permits).</p>
+<h3><a class="anchor" aria-hidden="true" id="overview-1"></a><a href="#overview-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h3>
+<p>As mentioned in the Overview, there's a public and private subnet, with a server in each subnet:</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/kL3sneYGCmKM-mWSo1MRlwji.png" alt=""></p>
+<h3><a class="anchor" aria-hidden="true" id="public-subnet-requirements"></a><a href="#public-subnet-requirements" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Public subnet requirements</h3>
+<p>There are three things that make a subnet &quot;public&quot;.</p>
+<ul>
+<li>You need an <strong>Internet Gateway</strong>. This not only allows outbound traffic to the internet, it also provides a route
+from the public internet to the EC2 instances.</li>
+<li>There needs to be a <strong>Route</strong> that points all non-local traffic to the Internet Gateway. This Route needs to be in a
+<strong>Route Table</strong> that's associated with the public subnet.</li>
+<li>The EC2 instance needs a public IP address. You can configure the subnet to automatically assign new EC2 instances a
+public IP address.</li>
+</ul>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/6dCDFuMHlQ-G7gM4DUJfgpRV.png" alt=""></p>
+<p>The Private subnet does not have a Route to the Internet Gateway, and for this reason is not public.</p>
+<h3><a class="anchor" aria-hidden="true" id="ec2-security-group-ingress-ip-address-and-port"></a><a href="#ec2-security-group-ingress-ip-address-and-port" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>EC2 Security Group Ingress (IP address and port)</h3>
+<p>Even if there's a Route to the Bastion host, there aren't any TCP ports exposed by default.</p>
+<p>To fix this, you need to add an <strong>EC2 Security Group</strong> to the Bastion host. An EC2 Security Group is a firewall that
+opens up access to specific ports.</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/JGrxm6odLufxOSiPalTx-Mvl.png" alt=""></p>
+<p>An EC2 Security Group has a list of rules. Each rule has the following properties:</p>
+<ul>
+<li><strong>Type</strong>: A TCP protocol like SSH or HTTP</li>
+<li><strong>Protocol</strong>: Typically TCP</li>
+<li><strong>Port Range</strong>:  The destination port you want to open, such as 22</li>
+<li><strong>Source</strong>: An IP range, such as <code>69.143.221.67/32</code>. The <code>/32</code> is CIDR notation to specify a range of a single
+address. The Source can also be another EC2 Security Group.</li>
+</ul>
+<p>In the lab, you created a TCP 22 Inbound Rule that used your client machine's public IP address as the Source.
+(This was the <strong>InputCIDR</strong> field in the CloudFormation template)</p>
+<p>According to the diagram so far, you should be able to SSH into the Bastion host.</p>
+<h3><a class="anchor" aria-hidden="true" id="ec2-security-group-ingress-from-another-security-group"></a><a href="#ec2-security-group-ingress-from-another-security-group" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>EC2 Security Group Ingress (from another Security Group)</h3>
+<p>From the Bastion host, you want to SSH again into the Private EC2 instance.</p>
+<p>From a routing perspective, you should be able to reach it. By default, Route Tables in the VPC come with a <strong>default
+route</strong>, which allows subnets within a VPC to communicate with each other. The rule looks like this:</p>
+<ul>
+<li><strong>Destination</strong>: 192.168.1.0/24</li>
+<li><strong>Target</strong>: Local</li>
+</ul>
+<p>There's still something missing though. Just like the Bastion host, the Private EC2 instance needs a Security Group
+to allow traffic over port 22. This time, instead of using an IP address range as the <strong>Source</strong>, you're using the
+Bastion host's EC2 Security Group.</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/es8eu4SqioqCNawfpcTh1MBH.png" alt=""></p>
+<p>According to the diagram so far, you should be able to SSH into the Bastion host, and SSH a second time into the
+Private EC2 instance.</p>
+<h2><a class="anchor" aria-hidden="true" id="vpc-lab-challenge"></a><a href="#vpc-lab-challenge" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>VPC Lab Challenge</h2>
+<p>If you still have time, try doing the Challenge:</p>
+<p><a href="/aws-security-training-web/docs/vpc-lab-challenge-nat-gateway">VPC Lab Challenge</a></p>
+<h2><a class="anchor" aria-hidden="true" id="cleanup"></a><a href="#cleanup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cleanup</h2>
+<p>If you're out of time, delete your CloudFormation stack:</p>
+<p><a href="/aws-security-training-web/docs/tear-down-a-cloudformation-stack">Tear down a CloudFormation stack</a></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/aws-security-training-web/docs/mfa-challenge"><span class="arrow-prev">← </span><span>Challenge: MFA</span></a><a class="docs-next button" href="/aws-security-training-web/docs/vpc-lab-challenge-nat-gateway"><span>Challenge: NAT Gateway</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#objectives">Objectives</a></li><li><a href="#overview">Overview</a></li><li><a href="#region-selection">Region selection</a></li><li><a href="#preparation">Preparation</a></li><li><a href="#spin-up-the-cloudformation-template">Spin up the CloudFormation template</a></li><li><a href="#connect-to-the-bastion-host">Connect to the Bastion host</a><ul class="toc-headings"><li><a href="#pc-putty">PC / PuTTY</a></li><li><a href="#macos-ec2connect">MacOS/EC2Connect</a></li></ul></li><li><a href="#connect-to-the-private-ec2-instance">Connect to the private EC2 instance</a></li><li><a href="#what-just-happened">What just happened?</a><ul class="toc-headings"><li><a href="#overview-1">Overview</a></li><li><a href="#public-subnet-requirements">Public subnet requirements</a></li><li><a href="#ec2-security-group-ingress-ip-address-and-port">EC2 Security Group Ingress (IP address and port)</a></li><li><a href="#ec2-security-group-ingress-from-another-security-group">EC2 Security Group Ingress (from another Security Group)</a></li></ul></li><li><a href="#vpc-lab-challenge">VPC Lab Challenge</a></li><li><a href="#cleanup">Cleanup</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/aws-security-training-web/" class="nav-home"><img src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training" width="66" height="58"/></a><div><h5>Docs</h5><a href="/aws-security-training-web/docs/en/doc1.html">Getting Started (or other categories)</a></div></section><section class="copyright">Copyright © 2019 Thorn Technologies LLC</section></footer></div></body></html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Module 3 Lab: S3 Access from EC2 · Thorn Tech Training</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Objectives"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Module 3 Lab: S3 Access from EC2 · Thorn Tech Training"/><meta property="og:type" content="website"/><meta property="og:url" content="https://thorntechpublic.github.io/aws-security-training-web/"/><meta property="og:description" content="## Objectives"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/aws-security-training-web/img/thorn_tech_t_icon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/aws-security-training-web/js/scrollSpy.js"></script><link rel="stylesheet" href="/aws-security-training-web/css/main.css"/><script src="/aws-security-training-web/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/aws-security-training-web/"><img class="logo" src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training"/><h2 class="headerTitleWithLogo">Thorn Tech Training</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/aws-security-training-web/docs/lab-table-of-contents" target="_self">Docs</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Module 3</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Lab Table of Contents</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-table-of-contents">Lab Table of Contents</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 1</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/initial-connection-instructions">Lab: Initial Connection Instructions</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/create-users-and-groups">Lab: Create Users and Groups</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/mfa-challenge">Challenge: MFA</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 2</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-instructions">Lab: VPC</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/vpc-lab-challenge-nat-gateway">Challenge: NAT Gateway</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 3</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/aws-security-training-web/docs/module-3-lab-s3-access-from-ec2">Lab: S3 Access from EC2</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-3-challenge-s3-access-and-kms">Challenge: S3 Access and KMS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 4</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab-serverless">Lab: Serverless Application</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/lab4-wordpress-application">Lab: WordPress Application</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 5</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-5-lab-cloudwatch-events">Lab: CloudWatch Events</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-5-aws-config-rules">Lab: AWS Config Rules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Module 6</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/module-6-lab-amazon-inspector">Lab: Amazon Inspector</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Appendix</h3><ul class=""><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/create-an-ec2-key-pair">Create an EC2 Key Pair</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/spin-up-a-cloudformation-template">Spin Up a CloudFormation Template</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/tear-down-a-cloudformation-stack">Tear Down a CloudFormation Stack</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-into-an-ec2-instance-pc">SSH Into an EC2 Instance (PC)</a></li><li class="navListItem"><a class="navItem" href="/aws-security-training-web/docs/ssh-to-an-ec2-instance-macos-or-linux-ec2connect">SSH to an EC2 Instance (MacOS or Linux)</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Module 3 Lab: S3 Access from EC2</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="objectives"></a><a href="#objectives" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Objectives</h2>
+<ul>
+<li>Spin up a CloudFormation template with an EC2 instance and S3 bucket</li>
+<li>Access S3 from the EC2 instance</li>
+<li>Lock down the EC2 IAM permissions, and verify that it cannot access a restricted S3 bucket</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="overview"></a><a href="#overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h2>
+<p>In this lab, you will use CloudFormation to spin up an EC2 instance and an S3 bucket. From the EC2 instance, you will
+upload a file to the S3 bucket using the AWS CLI.</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/H_LEjViTuGp8OFapIxqMfLw7.png" alt=""></p>
+<p>An <strong>IAM Role</strong> is what gives the EC2 instance permissions to write to S3. Here's how it works:</p>
+<ul>
+<li>An <strong>IAM Policy</strong> grants permission to S3</li>
+<li>You can't attach the IAM Policy directly to an EC2 instance, as you would an IAM User. But you can attach it to
+an <strong>IAM Role</strong>, which is an Identity that services can assume.</li>
+<li>An <strong>EC2 Instance Profile</strong> is a container for the IAM Role that helps in passing the Role to the EC2 instance.</li>
+</ul>
+<p>This diagram illustrates the relationship between a policy, role, and instance profile.</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/C9zT0XAqEMg1_httAzJj-y7w.png" alt=""></p>
+<p>In short, you should be able to access all S3 resources from the EC2 instance.</p>
+<h2><a class="anchor" aria-hidden="true" id="preparation"></a><a href="#preparation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preparation</h2>
+<p>If you don't have an EC2 Key Pair, follow these instructions:
+<a href="/aws-security-training-web/docs/create-an-ec2-key-pair">Create an EC2 Key Pair</a></p>
+<h2><a class="anchor" aria-hidden="true" id="spin-up-the-cloudformation-template"></a><a href="#spin-up-the-cloudformation-template" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Spin up the CloudFormation template</h2>
+<p>Spin up the CloudFormation template using these instructions:
+<a href="/aws-security-training-web/docs/spin-up-a-cloudformation-template">Spin up a CloudFormation template</a></p>
+<ul>
+<li><strong>CloudFormation template</strong>: <code>IAMandS3Access.template</code></li>
+<li><strong>CloudFormation Parameters</strong>:
+<ul>
+<li><strong>S3BucketName</strong>: Enter an S3 bucket name. To make it globally unique, prefix it with your name and use hyphens.
+For example: <code>rob-s3-iam-lab</code></li>
+</ul></li>
+<li><strong>Typical provisioning duration</strong>: 3 to 5 minutes</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="ssh-into-the-ec2-instance"></a><a href="#ssh-into-the-ec2-instance" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SSH into the EC2 instance</h2>
+<p>On the CloudFormation <strong>Outputs</strong> tab, copy the value for the <strong>PublicIP</strong></p>
+<p>Follow these instructions to connect to the Public IP:</p>
+<p><a href="/aws-security-training-web/docs/ssh-into-an-ec2-instance-pc">SSH into an EC2 Instance (PC)</a></p>
+<p><a href="/aws-security-training-web/docs/ssh-to-an-ec2-instance-macos-or-linux-ec2connect">SSH to an EC2 instance (MacOS or Linux)</a></p>
+<h2><a class="anchor" aria-hidden="true" id="upload-a-file"></a><a href="#upload-a-file" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Upload a file</h2>
+<p>After you SSH into the EC2 instance, you should be at home directory of the <code>ec2-user</code>. List the contents, and you
+should see two files.</p>
+<pre><code class="hljs css language-bash">[ec2-user@ip-192-168-1-11 ~]$ <span class="hljs-built_in">pwd</span>
+/home/ec2-user
+
+[ec2-user@ip-192-168-1-11 ~]$ ll
+total 8
+-rw-r--r-- 1 root root 7 Jul 22 13:42 file1.txt
+-rw-r--r-- 1 root root 7 Jul 22 13:42 file2.txt
+</code></pre>
+<p>Upload <code>file1.txt</code> using the AWS CLI:</p>
+<pre><code class="hljs css language-bash">[ec2-user@ip-192-168-1-11 ~]$ aws s3 cp file1.txt s3://rob-s3-iam
+upload: ./file1.txt to s3://rob-s3-iam/file1.txt 
+</code></pre>
+<p>Make sure you replace the S3 bucket name in the command above with your own.</p>
+<h2><a class="anchor" aria-hidden="true" id="verify-file-from-the-s3-console"></a><a href="#verify-file-from-the-s3-console" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Verify file from the S3 console</h2>
+<p>In the AWS console, navigate to the S3 service. You can do this by clicking on  <strong>Services</strong> on the top left, and then
+searching for &quot;S3&quot;.</p>
+<p>Click on your S3 bucket name (in my case, it's <code>rob-s3-iam</code>)</p>
+<p>You should see <code>file1.txt</code>. Click on it to see the object metadata.</p>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/R_vsqI4V7UmStVWjRvYNHY-V.png" alt=""></p>
+<p>Here are a few things worth pointing out:</p>
+<ul>
+<li><strong>Open</strong>: The S3 console opens the file in a new tab. You should see the file contents, which is the text  <code>file 1</code>.</li>
+<li><strong>Server-side encryption</strong>: Currently, the file is unencrypted. You'll learn more about this in the challenge
+section.</li>
+<li><strong>Object URL</strong>: This is the publicly accessible URL for this object. Since this bucket is private, you should see an
+<code>AccessDenied</code> error.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="access-other-s3-buckets"></a><a href="#access-other-s3-buckets" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Access other S3 buckets</h2>
+<p>The CloudFormation template spins up a second S3 bucket, named:</p>
+<p><code>&lt;your-s3-bucket&gt;-restricted</code></p>
+<p>You can find the restricted S3 bucket name in the CloudFormation Outputs tab.</p>
+<p>Your EC2 instance has access to this bucket because it has S3 Full Access. To test this, run the following commands
+from your EC2 instance:</p>
+<pre><code class="hljs css language-bash">aws s3 cp s3://&lt;restricted-s3-bucket&gt;/restricted.txt .
+cat restricted.txt
+</code></pre>
+<p>You should at this point be able to see the context of the <code>restricted.txt</code> file, which is simply
+<code>contents of restricted file</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="modifying-iam-permissions"></a><a href="#modifying-iam-permissions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Modifying IAM permissions</h2>
+<p>In this section, you are going to tailor down your EC2 instance so that it can no longer access the restricted bucket.</p>
+<ul>
+<li>In CloudFormation, click on the <strong>Resources</strong> tab of your stack.</li>
+<li>Next to <strong>EC2Instance</strong>, click the link of the EC2 instance ID.</li>
+<li>On the <strong>Description</strong> tab, click the link next to <strong>IAM role</strong></li>
+</ul>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/hX6PSA4TZU-_ZxPdGGfzDknp.png" alt=""></p>
+<ul>
+<li>On the IAM Role <strong>Summary</strong> page, look at the <strong>Permissions</strong> tab.</li>
+<li>You should see two policies — <strong>AmazonS3FullAccess</strong> and <strong>EC2Policy</strong>:</li>
+</ul>
+<p><img src="https://static.slab.com/prod/uploads/posts/images/kRI3YSdLXHoWI5DJ3IwfAt_u.png" alt=""></p>
+<ul>
+<li>Click the &quot;<strong>x</strong>&quot; next to the <strong>AmazonS3FullAccess</strong> managed policy to detach it.</li>
+<li>When asked to confirm, click <strong>Detach</strong>.</li>
+</ul>
+<p>Leave the <strong>EC2Policy</strong> intact. This policy grants access to a single S3 bucket.</p>
+<h2><a class="anchor" aria-hidden="true" id="verify-s3-access"></a><a href="#verify-s3-access" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Verify S3 access</h2>
+<p>Run the following command to list the contents of the restricted S3 bucket:</p>
+<pre><code class="hljs css language-bash">[ec2-user@ip-192-168-1-11 ~]$ aws s3 ls s3://rob-s3-iam-restricted
+</code></pre>
+<p>You should see the following error message:</p>
+<pre><code class="hljs css language-markdown">An error occurred (AccessDenied) when calling the ListObjectsV2 operation: Access Denied
+</code></pre>
+<p>You are denied access because you no longer have S3 Full Access.</p>
+<p>Now verify whether you still have access to your S3 bucket:</p>
+<pre><code class="hljs css language-bash">[ec2-user@ip-192-168-1-11 ~]$ aws s3 ls s3://rob-s3-iam 
+2019-07-22 13:58:57          7 file1.txt
+</code></pre>
+<p>You should see <code>file1.txt</code> listed, which you uploaded earlier.</p>
+<p>At this point, you have access to one S3 bucket (i.e. <code>rob-s3-iam</code>), but do not have access to any other S3 buckets.</p>
+<h2><a class="anchor" aria-hidden="true" id="what-to-do-next"></a><a href="#what-to-do-next" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What to do next</h2>
+<p>If you still have time, try doing the Challenge:</p>
+<p><a href="/aws-security-training-web/docs/module-3-challenge-s3-access-and-kms">Module 3 Challenge: S3 Access and KMS</a></p>
+<p>Otherwise, if you are out of time, delete your CloudFormation stack:</p>
+<p><a href="/aws-security-training-web/docs/tear-down-a-cloudformation-stack">Tear down a CloudFormation stack</a></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/aws-security-training-web/docs/vpc-lab-challenge-nat-gateway"><span class="arrow-prev">← </span><span>Challenge: NAT Gateway</span></a><a class="docs-next button" href="/aws-security-training-web/docs/module-3-challenge-s3-access-and-kms"><span>Challenge: S3 Access and KMS</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#objectives">Objectives</a></li><li><a href="#overview">Overview</a></li><li><a href="#preparation">Preparation</a></li><li><a href="#spin-up-the-cloudformation-template">Spin up the CloudFormation template</a></li><li><a href="#ssh-into-the-ec2-instance">SSH into the EC2 instance</a></li><li><a href="#upload-a-file">Upload a file</a></li><li><a href="#verify-file-from-the-s3-console">Verify file from the S3 console</a></li><li><a href="#access-other-s3-buckets">Access other S3 buckets</a></li><li><a href="#modifying-iam-permissions">Modifying IAM permissions</a></li><li><a href="#verify-s3-access">Verify S3 access</a></li><li><a href="#what-to-do-next">What to do next</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/aws-security-training-web/" class="nav-home"><img src="/aws-security-training-web/img/thorn_tech_t_icon.png" alt="Thorn Tech Training" width="66" height="58"/></a><div><h5>Docs</h5><a href="/aws-security-training-web/docs/en/doc1.html">Getting Started (or other categories)</a></div></section><section class="copyright">Copyright © 2019 Thorn Technologies LLC</section></footer></div></body></html>
